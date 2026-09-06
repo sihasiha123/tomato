@@ -1,0 +1,17 @@
+[0m[INFO] [1773558859.322796714]: Livox Ros Driver2 Version: 1.2.4[0m
+data source:0.
+[0m[INFO] [1773558859.324251808]: Data Source is raw lidar.[0m
+[0m[INFO] [1773558859.324392493]: Config file : /home/nuc531/robot/lidar_ws01/src/livox_ros_driver2/config/MID360_config.json[0m
+LdsLidar *GetInstance
+config lidar type: 8
+successfully parse base config, counts: 1
+[2026-03-15 15:14:19.324] [console] [info] set master/slave sdk to master sdk by default  [parse_cfg_file.cpp] [Parse] [82]
+[2026-03-15 15:14:19.324] [console] [info] Livox lidar logger disable.  [parse_cfg_file.cpp] [Parse] [126]
+[2026-03-15 15:14:19.324] [console] [info] Device type:9 point cloud data and IMU data unicast is enabled.  [params_check.cpp] [CheckLidarMulticastIp] [100]
+[2026-03-15 15:14:19.324] [console] [info] Data Handler Init Succ.  [data_handler.cpp] [Init] [49]
+bind failed
+[2026-03-15 15:14:19.324] [console] [error] Create detection socket failed.  [device_manager.cpp] [CreateDetectionChannel] [275]
+[2026-03-15 15:14:19.324] [console] [error] Create detection channel failed.  [device_manager.cpp] [CreateChannel] [242]
+[2026-03-15 15:14:19.324] [console] [error] Create channel failed.  [device_manager.cpp] [Init] [169]
+Failed to init livox lidar sdk.
+[31m[ERROR] [1773558859.324705576]: Init lds lidar failed![0m

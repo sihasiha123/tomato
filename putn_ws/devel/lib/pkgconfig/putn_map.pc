@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/Desktop/de5/robot/putn_ws/devel
+
+Name: putn_map
+Description: Description of putn_map
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

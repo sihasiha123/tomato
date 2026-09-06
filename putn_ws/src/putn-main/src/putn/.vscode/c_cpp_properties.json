@@ -1,0 +1,38 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/nvidia/Desktop/robot/lidar_ws/devel/include/**",
+        "/home/nvidia/Desktop/robot/navigation_ws/devel/include/**",
+        "/home/nvidia/Desktop/robot/range_ws/devel/include/**",
+        "/home/nvidia/Desktop/robot/localization_ws/devel/include/**",
+        "/home/nvidia/Desktop/robot/putn_ws/devel/include/**",
+        "/home/nvidia/Desktop/robot/fastlivo_ws/src/FAST-LIVO2-main/include/**",
+        "/home/nvidia/Desktop/robot/navigation_ws/src/MoveBase3D-main/global_planner_3d/include/**",
+        "/home/nvidia/Desktop/robot/putn_ws/src/putn-main/src/putn/putn_gpr/include/**",
+        "/home/nvidia/Desktop/robot/localization_ws/src/ndt_omp-master/include/**",
+        "/home/nvidia/Desktop/robot/map_pub_ws/src/pcd_map_publisher/include/**",
+        "/home/nvidia/Desktop/robot/putn_ws/src/putn-main/src/putn/putn_planning/include/**",
+        "/home/nvidia/Desktop/robot/range_ws/src/ranger_ros-main/ranger_base/include/**",
+        "/home/nvidia/Desktop/robot/localization_ws/src/robot_localization/include/**",
+        "/home/nvidia/Desktop/robot/navigation_ws/src/MoveBase3D-main/rover_gpr/include/**",
+        "/home/nvidia/Desktop/robot/putn_ws/src/putn-main/src/scout_simulator/scout_gazebo_sim/include/**",
+        "/home/nvidia/Desktop/robot/range_ws/src/ugv_sdk/include/**",
+        "/home/nvidia/Desktop/robot/fastlivo_ws/src/rpg_vikit-master/vikit_common/include/**",
+        "/home/nvidia/Desktop/robot/fastlivo_ws/src/rpg_vikit-master/vikit_ros/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-arm64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

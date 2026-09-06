@@ -1,0 +1,35 @@
+<launch>
+  <!-- 参数：可通过命令行覆盖 -->
+  <arg name="pcd_map_file" default="$(env HOME)/Desktop/de5/robot/maps/processed_points.pcd" />
+  <arg name="use_rviz" default="true" />
+  <arg name="config_file" default="$(find putn)/config/for_real_scenarios/test.yaml" />
+  
+  <!-- 航点生成器 -->
+  <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator">
+      <remap from="~goal" to="/cur_goal"/>
+      <param name="waypoint_type" value="manual-lonely-waypoint"/>    
+  </node>
+  
+  <!-- 全局规划器 - 使用PCD地图文件 -->
+  <node pkg="putn" type="global_planning_node" name="global_planning_node" output="screen" required="true">
+      <!-- 话题重映射 -->
+      <remap from="~waypoints" to="/waypoint_generator/waypoints"/>
+      
+      <!-- 加载配置文件中的所有参数 -->
+      <rosparam file="$(arg config_file)" command="load" />
+      
+      <!-- 关键修改：设置PCD地图文件路径 -->
+      <param name="map/pcd_file_path" value="$(arg pcd_map_file)"/>
+      
+      <!-- 地图分辨率（与PCD处理器保持一致） -->
+      <param name="map/resolution" value="0.1"/>
+      
+      <!-- 调试模式（可选） -->
+      <param name="debug_mode" value="true"/>
+  </node>
+  
+  <!-- RViz可视化 -->
+  <node if="$(arg use_rviz)" name="rviz" pkg="rviz" type="rviz" 
+        args="-d $(find putn_launch)/rviz_config/simulation.rviz" required="true"/>
+  
+</launch>

@@ -1,0 +1,8 @@
+digraph G {
+"aft_mapped" -> "base_link"[label="Broadcaster: /ranger_base_node\nAverage rate: 50.201 Hz\nMost recent transform: 1755066194.711 ( 0.003 sec old)\nBuffer length: 4.980 sec\n"];
+"camera_init" -> "aft_mapped"[label="Broadcaster: /laserMapping\nAverage rate: 10.221 Hz\nMost recent transform: 1755066194.685 ( 0.028 sec old)\nBuffer length: 4.892 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1755066194.713"[ shape=plaintext ] ;
+ }->"camera_init";
+}

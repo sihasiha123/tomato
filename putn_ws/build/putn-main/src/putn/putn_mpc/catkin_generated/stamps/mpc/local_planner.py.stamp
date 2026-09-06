@@ -1,0 +1,692 @@
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import Bool, Float64, Float32MultiArray
+from geometry_msgs.msg import Pose, PoseArray, PoseStamped, Point, Twist
+from nav_msgs.msg import Path, Odometry, OccupancyGrid
+import numpy as np
+import tf
+from MPC import MPC
+from sensor_msgs.msg import LaserScan
+from visualization_msgs.msg import Marker, MarkerArray
+from std_srvs.srv import SetBool
+from rover_msgs.msg import roverGoalStatus
+import math
+
+
+class Local_Planner():
+    def __init__(self):
+        self.replan_period = rospy.get_param('/local_planner/replan_period', 0.01)
+        self.curr_state = np.zeros(5)
+        self.z = 0
+        self.N = 10
+        self.goal_state = np.zeros([self.N,4])
+        self.ref_path_close_set = False
+        self.target_state = np.array([-1,4,np.pi/2])
+        self.target_state_close = np.zeros(3)
+        self.desired_global_path = [np.zeros((0, 4), dtype=np.float64), 0]
+        self.have_plan = False
+        self.is_close = False
+        self.is_get = False
+        self.is_grasp = False
+        self.is_all_task_down = False
+        self.robot_state_set = False
+        self.ref_path_set = False
+        self.ob=[]
+        self.is_end=0
+        self.ob_total = []
+        
+        # 跟踪当前目标点和状态
+        self.current_goal_id = None  
+        self.current_status = 0      
+        self.current_goal = None     
+        self.goal_reached_threshold = rospy.get_param('~goal_reached_threshold', 0.25)
+        self.goal_stabilize_count = 0      
+        self.goal_stabilize_threshold = rospy.get_param('~goal_stabilize_threshold', 10)
+
+        # 到点后朝向对齐参数（满足朝向后才判定本地目标成功）
+        self.target_yaw = None
+        self.need_heading_align = rospy.get_param('~need_heading_align', True)
+        self.heading_error_threshold_deg = rospy.get_param('~heading_error_threshold_deg',1.0)
+        self.heading_error_threshold = math.radians(self.heading_error_threshold_deg)
+        self.heading_stabilize_count = 0
+        self.heading_stabilize_threshold = rospy.get_param('~heading_stabilize_threshold', 6)
+        self.aligning_heading = False
+        self.heading_kp = rospy.get_param('~heading_kp', 1.2)
+        self.heading_max_w = rospy.get_param('~heading_max_w', 0.45)
+        self.heading_min_w = rospy.get_param('~heading_min_w', 0.08)
+
+        self.max_path_points = rospy.get_param('~max_path_points', 5000)
+        self.last_path_signature = None
+        
+        # 防止状态重复发送
+        self.last_published_status = -1
+        self.goal_reached_time = None  
+        self.waiting_for_new_goal = False  
+        
+        # 调试标志 - 强制开启详细调试
+        self.debug_mode = rospy.get_param('~debug', True)  # 默认开启调试
+        self.verbose_debug = rospy.get_param('~verbose_debug', True)  # 详细调试模式
+        
+        # 调试计数器，用于控制输出频率
+        self.debug_counter = 0
+        self.debug_interval = 10  # 每10次循环输出一次详细调试信息
+        
+        # 只初始化一次
+        self.obstacle_markerarray = MarkerArray()
+        
+        # 初始化发布器
+        self._pub_local_goal_status = rospy.Publisher('/cur_local_goal_status', roverGoalStatus, queue_size=10)
+        self._pub_local_path = rospy.Publisher('/local_path', Path, queue_size=10)
+        self._pub_local_plan = rospy.Publisher('/local_plan', Float32MultiArray, queue_size=10)
+        self.ob_pub = rospy.Publisher('/ob_draw', MarkerArray, queue_size=10)
+        
+        self.control_cmd = Twist()
+        self.listener = tf.TransformListener()
+        self.times = 0
+        
+        # 初始化订阅器 - 注意话题名称
+        self._sub_curr_state = rospy.Subscriber('/curr_state', Float32MultiArray, self.__curr_pose_cb, queue_size=10)
+        self._sub_obs = rospy.Subscriber('/obs', Float32MultiArray, self.__obs_cb, queue_size=10)
+        
+        # 修正：订阅正确的话题名称（注意全局规划器发布的话题名）
+        self._sub_goal_state = rospy.Subscriber('/surf_predict_pub', Float32MultiArray, self._global_path_callback2, queue_size=10)
+        # 或者如果全局规划器使用不同的话题名，尝试：
+        # self._sub_goal_state = rospy.Subscriber('/global_path', Float32MultiArray, self._global_path_callback2, queue_size=10)
+        
+        self._sub_global_status = rospy.Subscriber('/cur_global_goal_status', roverGoalStatus, self.__global_status_cb, queue_size=10)
+        self._sub_cur_goal = rospy.Subscriber('/cur_goal', PoseStamped, self.__cur_goal_cb, queue_size=10)
+        
+        # 初始化定时器
+        self._timer_replan = rospy.Timer(rospy.Duration(self.replan_period), self.__replan_cb)
+        
+        rospy.loginfo("========= 局部规划器初始化完成 =========")
+        rospy.loginfo(f"调试模式: {self.debug_mode}")
+        rospy.loginfo(f"详细调试: {self.verbose_debug}")
+        rospy.loginfo(f"订阅话题: surf_predict_pub (全局路径)")
+        rospy.loginfo(f"订阅话题: /curr_state (机器人状态)")
+        rospy.loginfo("=========================================")
+
+    def angle_to_degrees(self, angle_rad):
+        """将弧度转换为角度，便于理解"""
+        return math.degrees(angle_rad) % 360
+
+    def normalize_angle(self, angle):
+        """标准化角度到[-pi, pi]范围"""
+        while angle > math.pi:
+            angle -= 2 * math.pi
+        while angle < -math.pi:
+            angle += 2 * math.pi
+        return angle
+
+    def get_angle_direction_text(self, angle_rad):
+        """根据角度返回方向文字描述"""
+        angle_deg = self.angle_to_degrees(angle_rad)
+        if angle_deg < 22.5 or angle_deg >= 337.5:
+            return "东 (→)"
+        elif angle_deg < 67.5:
+            return "东北 (↗)"
+        elif angle_deg < 112.5:
+            return "北 (↑)"
+        elif angle_deg < 157.5:
+            return "西北 (↖)"
+        elif angle_deg < 202.5:
+            return "西 (←)"
+        elif angle_deg < 247.5:
+            return "西南 (↙)"
+        elif angle_deg < 292.5:
+            return "南 (↓)"
+        else:
+            return "东南 (↘)"
+
+    def reset_planner_state(self):
+        """完全重置规划器状态"""
+        rospy.loginfo("========= 重置局部规划器状态 =========")
+        self.is_end = 0
+        self.goal_stabilize_count = 0
+        self.have_plan = False
+        self.ref_path_set = False
+        self.desired_global_path = [np.zeros((0, 4), dtype=np.float64), 0]
+        self.last_path_signature = None
+        self.waiting_for_new_goal = False
+        self.last_published_status = -1
+        self.goal_reached_time = None
+        self.target_yaw = None
+        self.heading_stabilize_count = 0
+        self.aligning_heading = False
+        rospy.loginfo("状态重置完成")
+
+    def distance_sqaure(self,c1,c2):
+        distance = (c1[0]-c2[0])*(c1[0]-c2[0])+(c1[1]-c2[1])*(c1[1]-c2[1])
+        return distance
+
+    def draw_ob(self):
+        self.obstacle_markerarray.markers=[]
+        num = 0
+        for i in range(len(self.ob)):
+            t_ob = Marker()
+            t_ob.header.frame_id = "camera_init"
+            t_ob.id = num
+            t_ob.type = t_ob.CYLINDER
+            t_ob.action = t_ob.ADD
+            t_ob.pose.position.x = self.ob[i][0]
+            t_ob.pose.position.y = self.ob[i][1]
+            t_ob.pose.position.z=0.2
+            t_ob.scale.x = 0.1
+            t_ob.scale.y = 0.1
+            t_ob.scale.z = 0.4
+            t_ob.color.a= 1
+            t_ob.color.r = 0
+            t_ob.color.g = 1
+            t_ob.color.b = 0
+            self.obstacle_markerarray.markers.append(t_ob)
+            num = num +1
+        self.ob_pub.publish(self.obstacle_markerarray)
+
+    def __obs_cb(self, data):
+        try:
+            self.ob = []
+            if(len(data.data)!=0):
+                size = len(data.data)//3
+                for i in range(size):
+                    self.ob.append(( (data.data[3*i]//0.3)*0.3, (data.data[3*i+1]//0.3)*0.3) )
+                dic = list(set([tuple(t) for t in self.ob]))
+                self.ob = [list(v) for v in dic]
+                self.draw_ob()
+                
+                if self.verbose_debug:
+                    rospy.loginfo(f"检测到 {len(self.ob)} 个障碍物")
+        except Exception as e:
+            rospy.logerr(f"Error in __obs_cb: {e}")
+
+    def __cur_goal_cb(self, data):
+        """接收新目标点并重置状态（含目标朝向）"""
+        try:
+            # 保存目标点坐标
+            new_goal = np.array([data.pose.position.x, data.pose.position.y])
+
+            # 解析目标朝向（yaw），若无效则跳过朝向对齐
+            target_yaw = None
+            q = [
+                data.pose.orientation.x,
+                data.pose.orientation.y,
+                data.pose.orientation.z,
+                data.pose.orientation.w,
+            ]
+            if np.linalg.norm(q) > 1e-6:
+                _, _, target_yaw = tf.transformations.euler_from_quaternion(q)
+
+            # 目标ID包含朝向，避免同一位置不同朝向被误判为同一目标
+            yaw_tag = 'none' if target_yaw is None else f"{target_yaw:.3f}"
+            goal_id = f"{new_goal[0]:.2f}_{new_goal[1]:.2f}_{yaw_tag}"
+
+            # 检查是否是新目标点
+            if goal_id != self.current_goal_id:
+                rospy.loginfo("========= 收到新目标点 =========")
+                rospy.loginfo(f"目标位置: [{new_goal[0]:.3f}, {new_goal[1]:.3f}]")
+
+                if target_yaw is not None:
+                    rospy.loginfo(
+                        f"目标角度: {self.angle_to_degrees(target_yaw):.1f}° "
+                        f"{self.get_angle_direction_text(target_yaw)}"
+                    )
+                else:
+                    rospy.logwarn("目标角度无效，将仅按位置判定到达")
+
+                # 如果已知机器人位置，计算距离和方向
+                if self.robot_state_set:
+                    dist_to_goal = np.sqrt(
+                        (self.curr_state[0] - new_goal[0]) ** 2
+                        + (self.curr_state[1] - new_goal[1]) ** 2
+                    )
+                    angle_to_goal = math.atan2(
+                        new_goal[1] - self.curr_state[1],
+                        new_goal[0] - self.curr_state[0],
+                    )
+                    rospy.loginfo(f"当前位置: [{self.curr_state[0]:.3f}, {self.curr_state[1]:.3f}]")
+                    rospy.loginfo(f"目标距离: {dist_to_goal:.3f}m")
+                    rospy.loginfo(
+                        f"目标方向: {self.angle_to_degrees(angle_to_goal):.1f}° "
+                        f"{self.get_angle_direction_text(angle_to_goal)}"
+                    )
+                    rospy.loginfo(
+                        f"当前朝向: {self.angle_to_degrees(self.curr_state[2]):.1f}° "
+                        f"{self.get_angle_direction_text(self.curr_state[2])}"
+                    )
+
+                    if target_yaw is not None:
+                        heading_diff = self.normalize_angle(target_yaw - self.curr_state[2])
+                        turn_text = '左转' if heading_diff > 0 else '右转'
+                        rospy.loginfo(
+                            f"最终需对齐角度: {self.angle_to_degrees(heading_diff):.1f}° ({turn_text})"
+                        )
+
+                # 完全重置规划器状态
+                self.reset_planner_state()
+
+                # 更新目标点信息
+                self.current_goal = new_goal
+                self.target_yaw = target_yaw
+                self.current_goal_id = goal_id
+                self.current_status = 1  # ACTIVE
+
+                # 立即发布ACTIVE状态
+                self.publish_status(1)
+                rospy.loginfo("局部规划器已为新目标点重置，等待全局路径...")
+                rospy.loginfo("===========================")
+
+        except Exception as e:
+            rospy.logerr(f"处理新目标点时出错: {e}")
+
+    def __global_status_cb(self, msg):
+        """接收全局规划器状态"""
+        if msg.status == 1 and self.waiting_for_new_goal:
+            rospy.loginfo("全局规划器已激活，等待新路径")
+            self.ref_path_set = False
+
+    def publish_status(self, status):
+        """发布状态，避免重复发送"""
+        if status != self.last_published_status:
+            status_msg = roverGoalStatus()
+            status_msg.status = status
+            self._pub_local_goal_status.publish(status_msg)
+            self.last_published_status = status
+            
+            status_names = {0: "PENDING", 1: "ACTIVE", 3: "SUCCEEDED", 4: "ABORTED"}
+            rospy.loginfo(f">>> 局部规划器状态: {status_names.get(status, 'UNKNOWN')} <<<")
+
+    def __replan_cb(self, event):
+        """规划周期回调"""
+        try:
+            self.debug_counter += 1
+
+            # 如果正在等待新目标，不进行规划
+            if self.waiting_for_new_goal:
+                if self.debug_counter % (self.debug_interval * 5) == 0:
+                    rospy.loginfo("等待新目标点中...")
+                return
+
+            # 检查是否已经到达目标点（位置 + 朝向）
+            if self.robot_state_set and self.current_goal is not None:
+                dist_to_goal = np.sqrt(
+                    (self.curr_state[0] - self.current_goal[0]) ** 2
+                    + (self.curr_state[1] - self.current_goal[1]) ** 2
+                )
+
+                heading_error = None
+                if self.target_yaw is not None:
+                    heading_error = self.normalize_angle(self.target_yaw - self.curr_state[2])
+
+                # 详细的位置和朝向调试信息
+                if self.verbose_debug and self.debug_counter % self.debug_interval == 0:
+                    rospy.loginfo("========= 机器人状态调试 =========")
+                    rospy.loginfo(
+                        f"当前位置: [{self.curr_state[0]:.3f}, {self.curr_state[1]:.3f}, {self.z:.3f}]"
+                    )
+                    rospy.loginfo(
+                        f"当前角度: {self.curr_state[2]:.4f} rad = {self.angle_to_degrees(self.curr_state[2]):.1f}°"
+                    )
+                    rospy.loginfo(f"朝向方向: {self.get_angle_direction_text(self.curr_state[2])}")
+                    rospy.loginfo(
+                        f"目标位置: [{self.current_goal[0]:.3f}, {self.current_goal[1]:.3f}]"
+                    )
+                    rospy.loginfo(f"距离目标: {dist_to_goal:.3f}m")
+
+                    angle_to_goal = math.atan2(
+                        self.current_goal[1] - self.curr_state[1],
+                        self.current_goal[0] - self.curr_state[0],
+                    )
+                    angle_diff = self.normalize_angle(angle_to_goal - self.curr_state[2])
+                    rospy.loginfo(
+                        f"目标方向: {self.angle_to_degrees(angle_to_goal):.1f}° "
+                        f"{self.get_angle_direction_text(angle_to_goal)}"
+                    )
+                    rospy.loginfo(
+                        f"航向偏差: {self.angle_to_degrees(angle_diff):.1f}° "
+                        f"({'需左转' if angle_diff > 0 else '需右转'})"
+                    )
+
+                    if self.target_yaw is not None:
+                        rospy.loginfo(
+                            f"目标角度: {self.angle_to_degrees(self.target_yaw):.1f}° "
+                            f"{self.get_angle_direction_text(self.target_yaw)}"
+                        )
+                        rospy.loginfo(
+                            f"最终角度误差: {math.degrees(abs(heading_error)):.2f}° "
+                            f"(阈值 {self.heading_error_threshold_deg:.2f}°)"
+                        )
+                    else:
+                        rospy.loginfo("目标角度: 无（仅位置到达）")
+
+                    rospy.loginfo(
+                        f"位置稳定计数: {self.goal_stabilize_count}/{self.goal_stabilize_threshold}"
+                    )
+                    rospy.loginfo(
+                        f"角度稳定计数: {self.heading_stabilize_count}/{self.heading_stabilize_threshold}"
+                    )
+                    rospy.loginfo("===============================")
+
+                # 1) 先用位置进入“最终方向调整阶段”
+                if dist_to_goal < self.goal_reached_threshold:
+                    self.goal_stabilize_count += 1
+                else:
+                    self.goal_stabilize_count = 0
+                    # 还未进入最终方向调整阶段时，角度计数清零
+                    if not self.aligning_heading:
+                        self.heading_stabilize_count = 0
+                    if self.is_end == 1 and not self.waiting_for_new_goal:
+                        rospy.loginfo("机器人离开目标点，重新开始规划")
+                        self.is_end = 0
+                        self.goal_reached_time = None
+
+                position_reached = self.goal_stabilize_count >= self.goal_stabilize_threshold
+                # 一旦进入最终方向调整阶段，就不再要求位置持续满足阈值
+                in_heading_finalize = self.aligning_heading or position_reached
+                heading_ready = False
+
+                # 2) 最终阶段只按朝向判断完成
+                if in_heading_finalize and self.need_heading_align and self.target_yaw is not None:
+                    abs_heading_error = abs(heading_error)
+                    if abs_heading_error > self.heading_error_threshold:
+                        if not self.aligning_heading:
+                            rospy.loginfo("进入最终方向调整阶段：后续仅按方向判定，不再判定位置")
+                        self.aligning_heading = True
+                        self.heading_stabilize_count = 0
+                        self.publish_status(1)
+                        self.publish_heading_align_command(heading_error)
+                        return
+                    else:
+                        self.aligning_heading = True
+                        self.heading_stabilize_count += 1
+                        self.publish_status(1)
+                        self.publish_stop_command()
+
+                        if self.heading_stabilize_count < self.heading_stabilize_threshold:
+                            return
+
+                        heading_ready = True
+                elif in_heading_finalize:
+                    # 不需要角度对齐或目标无yaw时，直接认为方向完成
+                    heading_ready = True
+
+                # 3) 只要方向满足，即判定成功（不再依赖位置）
+                if heading_ready:
+                    if self.is_end == 0:
+                        rospy.loginfo("========= 目标点完成（方向优先） =========")
+                        rospy.loginfo(f"当前位置: [{self.curr_state[0]:.3f}, {self.curr_state[1]:.3f}]")
+                        rospy.loginfo(
+                            f"当前朝向: {self.angle_to_degrees(self.curr_state[2]):.1f}° "
+                            f"{self.get_angle_direction_text(self.curr_state[2])}"
+                        )
+                        rospy.loginfo(f"当前距离目标: {dist_to_goal:.3f}m（已忽略位置判定）")
+                        if self.target_yaw is not None:
+                            final_err_deg = math.degrees(abs(self.normalize_angle(self.target_yaw - self.curr_state[2])))
+                            rospy.loginfo(f"最终角度误差: {final_err_deg:.2f}°")
+                        rospy.loginfo("========================================")
+                        self.is_end = 1
+                        self.goal_reached_time = rospy.Time.now()
+
+            # 如果已到达目标点
+            if self.is_end == 1:
+                self.publish_status(3)  # SUCCEEDED
+                self.publish_stop_command()
+
+                if not self.waiting_for_new_goal:
+                    self.waiting_for_new_goal = True
+                    rospy.loginfo("已到达目标点并完成角度对齐，等待新目标点...")
+                return
+
+            # 正常规划逻辑
+            if self.robot_state_set and self.ref_path_set:
+                # 确保路径有效
+                if self.desired_global_path[1] < 2:
+                    if self.debug_counter % (self.debug_interval * 2) == 0:
+                        rospy.logwarn("全局路径点数不足，等待有效路径")
+                    return
+
+                self.choose_goal_state()
+
+                # MPC规划
+                try:
+                    start_time = rospy.Time.now()
+                    states_sol, input_sol = MPC(np.expand_dims(self.curr_state, axis=0), self.goal_state, self.ob)
+                    end_time = rospy.Time.now()
+
+                    if self.debug_mode and self.debug_counter % self.debug_interval == 0:
+                        rospy.loginfo(f'MPC求解时间: {(end_time-start_time).to_sec():.3f}秒')
+                        rospy.loginfo(f'局部路径点数: {len(states_sol)}')
+                        if len(input_sol) > 0:
+                            rospy.loginfo(
+                                f'控制指令: v={input_sol[0][0]:.3f} m/s, ω={input_sol[0][1]:.3f} rad/s'
+                            )
+
+                    self.__publish_local_plan(input_sol, states_sol)
+                    self.have_plan = True
+                    self.publish_status(1)  # ACTIVE
+
+                except Exception as e:
+                    rospy.logerr(f"MPC规划失败: {e}")
+                    self.have_plan = False
+                    self.publish_status(4)  # ABORTED
+
+            elif not self.robot_state_set:
+                if self.debug_counter % (self.debug_interval * 5) == 0:
+                    rospy.logwarn("等待机器人位置...")
+            elif not self.ref_path_set:
+                if self.debug_counter % (self.debug_interval * 5) == 0:
+                    rospy.logwarn("等待全局路径...")
+
+        except Exception as e:
+            rospy.logerr(f"规划回调中出错: {e}")
+            self.publish_status(4)  # ABORTED
+
+    def publish_stop_command(self):
+        """发布停止命令"""
+        empty_plan = Float32MultiArray()
+        for i in range(self.N):
+            empty_plan.data.append(0.0)  # 速度为0
+            empty_plan.data.append(0.0)  # 角速度为0
+        self._pub_local_plan.publish(empty_plan)
+
+        if self.verbose_debug:
+            rospy.loginfo("发布停止命令: v=0, ω=0")
+
+    def publish_heading_align_command(self, heading_error):
+        """发布原地转向命令，使机器人在到点后对齐目标角度"""
+        cmd_w = self.heading_kp * heading_error
+
+        # 限幅，避免转向过猛
+        cmd_w = max(-self.heading_max_w, min(self.heading_max_w, cmd_w))
+
+        # 避免过小角速度导致电机不动作
+        if abs(cmd_w) < self.heading_min_w:
+            cmd_w = self.heading_min_w * np.sign(heading_error)
+
+        rotate_plan = Float32MultiArray()
+        for i in range(self.N):
+            rotate_plan.data.append(0.0)
+            rotate_plan.data.append(float(cmd_w))
+
+        self._pub_local_plan.publish(rotate_plan)
+
+        if self.verbose_debug and self.debug_counter % self.debug_interval == 0:
+            rospy.loginfo(
+                f"角度对齐中: 误差={math.degrees(heading_error):.2f}°, 发布ω={cmd_w:.3f} rad/s"
+            )
+
+    def __publish_local_plan(self,input_sol,state_sol):
+        local_path = Path()
+        local_plan = Float32MultiArray()
+        sequ = 0
+        local_path.header.stamp = rospy.Time.now()
+        local_path.header.frame_id = "camera_init"
+
+        for i in range(self.N):
+            this_pose_stamped = PoseStamped()
+            this_pose_stamped.pose.position.x = state_sol[i,0]
+            this_pose_stamped.pose.position.y = state_sol[i,1]
+            this_pose_stamped.pose.position.z = self.z+0.5
+            this_pose_stamped.header.seq = sequ
+            sequ += 1
+            this_pose_stamped.header.stamp = rospy.Time.now()
+            this_pose_stamped.header.frame_id="camera_init"
+            local_path.poses.append(this_pose_stamped)
+            
+            for j in range(2):
+                local_plan.data.append(input_sol[i][j])
+
+        self._pub_local_path.publish(local_path)
+        self._pub_local_plan.publish(local_plan)
+
+    def distance_global(self,c1,c2):
+        distance = np.sqrt((c1[0]-c2[0])*(c1[0]-c2[0])+(c1[1]-c2[1])*(c1[1]-c2[1]))
+        return distance
+    
+    def find_min_distance(self,c1):
+        size = self.desired_global_path[1]
+        if size == 0:
+            return 0
+        path_xy = self.desired_global_path[0][:size, :2]
+        c1_xy = np.array(c1[:2], dtype=np.float64)
+        dis2 = np.sum((path_xy - c1_xy) ** 2, axis=1)
+        return int(np.argmin(dis2))
+
+    def choose_goal_state(self):
+        """选择目标点状态"""
+        num = self.find_min_distance(self.curr_state)
+        scale = 1
+        num_list = []
+        for i in range(self.N):  
+            num_path = min(self.desired_global_path[1]-1, int(num+i*scale))
+            num_list.append(num_path)
+            
+        # 设置未来N个目标点
+        for k in range(self.N):
+            self.goal_state[k] = self.desired_global_path[0][num_list[k]]
+            
+        # 调试信息：显示选择的局部目标点
+        if self.verbose_debug and self.debug_counter % (self.debug_interval * 2) == 0:
+            rospy.loginfo(f"选择的路径点索引: {num}, 局部目标点: [{self.goal_state[0][0]:.3f}, {self.goal_state[0][1]:.3f}]")
+
+    def __curr_pose_cb(self, data):
+        """接收/curr_state话题的回调函数，完全匹配controller.py发布的格式"""
+        if not self.robot_state_set:
+            rospy.loginfo("========= 首次接收到机器人状态 =========")
+            
+        self.robot_state_set = True
+        if len(data.data) >= 6:  # 确保数据格式正确
+            old_x, old_y, old_theta = self.curr_state[0], self.curr_state[1], self.curr_state[2]
+            
+            self.curr_state[0] = data.data[0]  # x
+            self.curr_state[1] = data.data[1]  # y
+            self.z = data.data[2]              # z
+            self.curr_state[2] = data.data[3]  # theta (yaw)
+            # data.data[4] 是 roll
+            # data.data[5] 是 pitch
+            
+            # 只在首次接收或有显著变化时输出详细信息
+            if not hasattr(self, '_first_pose_logged'):
+                rospy.loginfo("========= 机器人初始状态 =========")
+                rospy.loginfo(f"初始位置: [{self.curr_state[0]:.3f}, {self.curr_state[1]:.3f}, {self.z:.3f}]")
+                rospy.loginfo(f"初始角度: {self.curr_state[2]:.4f} rad = {self.angle_to_degrees(self.curr_state[2]):.1f}°")
+                rospy.loginfo(f"初始朝向: {self.get_angle_direction_text(self.curr_state[2])}")
+                rospy.loginfo("==============================")
+                self._first_pose_logged = True
+                
+            # 详细的状态调试（降低频率）
+            if self.verbose_debug and hasattr(self, '_first_pose_logged'):
+                # 检查位置或角度是否有较大变化
+                pos_changed = (abs(self.curr_state[0] - old_x) > 0.05 or 
+                              abs(self.curr_state[1] - old_y) > 0.05)
+                angle_changed = abs(self.normalize_angle(self.curr_state[2] - old_theta)) > 0.1
+                
+                if pos_changed or angle_changed or self.debug_counter % (self.debug_interval * 3) == 0:
+                    rospy.loginfo(f"位置: [{self.curr_state[0]:.3f}, {self.curr_state[1]:.3f}] "
+                                 f"角度: {self.angle_to_degrees(self.curr_state[2]):.1f}° "
+                                 f"{self.get_angle_direction_text(self.curr_state[2])}")
+                    
+        else:
+            rospy.logwarn(f"收到异常的curr_state数据，长度: {len(data.data)}")
+
+    def _build_path_signature(self, path_np):
+        size = path_np.shape[0]
+        if size == 0:
+            return None
+        sample_count = min(5, size)
+        sample_indices = np.linspace(0, size - 1, sample_count, dtype=int)
+        sampled = np.round(path_np[sample_indices, :3].reshape(-1), 2)
+        return (size, *sampled.tolist())
+    
+    def _store_global_path(self, path_np, path_format_name):
+        size = path_np.shape[0]
+        self.desired_global_path = [path_np, size]
+        self.ref_path_set = size >= 2
+        path_signature = self._build_path_signature(path_np)
+        is_new_path = path_signature != self.last_path_signature
+
+        if is_new_path:
+            self.last_path_signature = path_signature
+            rospy.loginfo(f"========= 收到全局路径（{path_format_name}） =========")
+            rospy.loginfo(f"路径点数: {size}")
+            if size > 0:
+                rospy.loginfo(f"起点: [{path_np[0,0]:.3f}, {path_np[0,1]:.3f}]")
+                rospy.loginfo(f"终点: [{path_np[size-1,0]:.3f}, {path_np[size-1,1]:.3f}]")
+            rospy.loginfo("==========================================")
+
+        if self.waiting_for_new_goal and self.ref_path_set:
+            self.waiting_for_new_goal = False
+            self.is_end = 0
+            rospy.loginfo("收到新路径，开始规划")
+
+    def _global_path_callback(self, data):
+        """接收全局路径 - 3个元素格式"""
+        if len(data.data) == 0:
+            return
+
+        if len(data.data) % 3 != 0:
+            rospy.logwarn(f"全局路径格式异常（3元素模式），数据长度: {len(data.data)}")
+            return
+
+        size = len(data.data) // 3
+        if size > self.max_path_points:
+            rospy.logwarn(f"全局路径点数 {size} 超过上限 {self.max_path_points}，进行截断")
+            size = self.max_path_points
+
+        path_np = np.zeros((size, 4), dtype=np.float64)
+        for i in range(size):
+            src = 3 * (size - i - 1)
+            path_np[i, 0] = data.data[src]
+            path_np[i, 1] = data.data[src + 1]
+            path_np[i, 2] = 0.0
+            path_np[i, 3] = 0.0
+
+        self._store_global_path(path_np, "3元素格式")
+    
+    def _global_path_callback2(self, data):
+        """接收全局路径 - 5个元素格式"""
+        if len(data.data) == 0:
+            return
+
+        if len(data.data) % 5 != 0:
+            rospy.logwarn(f"全局路径格式异常（5元素模式），数据长度: {len(data.data)}")
+            return
+
+        size = len(data.data) // 5
+        if size > self.max_path_points:
+            rospy.logwarn(f"全局路径点数 {size} 超过上限 {self.max_path_points}，进行截断")
+            size = self.max_path_points
+
+        path_np = np.zeros((size, 4), dtype=np.float64)
+        for i in range(size):
+            src = 5 * (size - i - 1)
+            path_np[i, 0] = data.data[src]
+            path_np[i, 1] = data.data[src + 1]
+            path_np[i, 2] = data.data[src + 3]
+            path_np[i, 3] = data.data[src + 4]
+
+        self._store_global_path(path_np, "5元素格式")
+
+
+if __name__ == '__main__':
+    rospy.init_node("local_planner")
+    phri_planner = Local_Planner()
+    rospy.spin()

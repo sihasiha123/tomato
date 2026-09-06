@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/ubuntu/Desktop/de5/robot/putn_ws/devel/lib/libscout_gazebo.a  CMakeFiles/scout_gazebo.dir/src/scout_skid_steer.cpp.o
+/usr/bin/ranlib /home/ubuntu/Desktop/de5/robot/putn_ws/devel/lib/libscout_gazebo.a

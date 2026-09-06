@@ -1,0 +1,18 @@
+Log file created at: 2026/04/23 08:54:24
+Running on machine: ubuntu
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+[I20260423 08:54:24.440953 37170 DeviceManager.cpp:54] DeviceManager init ...
+[I20260423 08:54:24.441785 37170 LinuxPal.cpp:21] createObPal: create LinuxPal!
+[I20260423 08:54:24.658066 37170 EnumeratorLibusb.cpp:325] queryDevicesInfo done!
+[I20260423 08:54:24.730657 37170 DeviceManager.cpp:373] Current usb device port list::
+[I20260423 08:54:24.730686 37170 DeviceManager.cpp:375]         - 2-1.2-3.0 | Orbbec(R) Astra(TM) 3D Camera(F) Depth
+[I20260423 08:54:24.730692 37170 DeviceManager.cpp:375]         - 1-1.1-4.0 | USB Camera
+[W20260423 08:54:24.730708 37170 OpenNIDeviceInfo.cpp:172] New openni device matched.
+[I20260423 08:54:24.730718 37170 DeviceManager.cpp:345] Devices matched:
+[I20260423 08:54:24.730723 37170 DeviceManager.cpp:359]   - openniDevice = 1
+[I20260423 08:54:24.730760 37170 LinuxPal.cpp:142] Create PollingDeviceWatcher!
+[I20260423 08:54:24.730768 37170 DeviceManager.cpp:99] DeviceManager init  done!
+[I20260423 08:54:24.730773 37170 DeviceManager.cpp:50] DeviceManager construct done
+[I20260423 08:54:24.730777 37170 Context.cpp:51] Context created!
+[E20260423 08:54:28.399544 37170 OpenNIHostProtocol.cpp:502] Get usb core type failed!

@@ -1,0 +1,15 @@
+Log file created at: 2026/04/02 09:39:40
+Running on machine: ubuntu
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+[I20260402 09:39:40.773134 224232 DeviceManager.cpp:54] DeviceManager init ...
+[I20260402 09:39:40.773250 224232 LinuxPal.cpp:21] createObPal: create LinuxPal!
+[I20260402 09:39:47.892364 224232 EnumeratorLibusb.cpp:325] queryDevicesInfo done!
+[I20260402 09:39:47.892686 224232 DeviceManager.cpp:373] Current usb device port list::
+[I20260402 09:39:47.892719 224232 DeviceManager.cpp:375]         - 5-2.1-3.0 | USB Camera
+[I20260402 09:39:47.892738 224232 DeviceManager.cpp:362] No device matched!
+[I20260402 09:39:47.892820 224232 LinuxPal.cpp:142] Create PollingDeviceWatcher!
+[I20260402 09:39:47.892833 224232 DeviceManager.cpp:99] DeviceManager init  done!
+[I20260402 09:39:47.892839 224232 DeviceManager.cpp:50] DeviceManager construct done
+[I20260402 09:39:47.892845 224232 Context.cpp:51] Context created!
+[W20260402 09:39:47.892856 224232 ObException.cpp:5] No device found, fail to create pipeline!

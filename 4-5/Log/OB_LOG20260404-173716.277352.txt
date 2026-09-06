@@ -1,0 +1,487 @@
+Log file created at: 2026/04/04 17:37:16
+Running on machine: ubuntu
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+[I20260404 17:37:16.613595 277352 DeviceManager.cpp:54] DeviceManager init ...
+[I20260404 17:37:16.613698 277352 LinuxPal.cpp:21] createObPal: create LinuxPal!
+[I20260404 17:37:16.753059 277352 EnumeratorLibusb.cpp:325] queryDevicesInfo done!
+[I20260404 17:37:16.753208 277352 DeviceManager.cpp:373] Current usb device port list::
+[I20260404 17:37:16.753221 277352 DeviceManager.cpp:375]         - 5-2.2-6.0 | Orbbec(R) Astra(TM) 3D Camera(F) Depth
+[I20260404 17:37:16.753225 277352 DeviceManager.cpp:375]         - 5-2.1-5.0 | USB Camera
+[W20260404 17:37:16.753237 277352 OpenNIDeviceInfo.cpp:172] New openni device matched.
+[I20260404 17:37:16.753247 277352 DeviceManager.cpp:345] Devices matched:
+[I20260404 17:37:16.753250 277352 DeviceManager.cpp:359]   - openniDevice = 1
+[I20260404 17:37:16.753296 277352 LinuxPal.cpp:142] Create PollingDeviceWatcher!
+[I20260404 17:37:16.753304 277352 DeviceManager.cpp:99] DeviceManager init  done!
+[I20260404 17:37:16.753309 277352 DeviceManager.cpp:50] DeviceManager construct done
+[I20260404 17:37:16.753314 277352 Context.cpp:51] Context created!
+[I20260404 17:37:16.753319 277352 DeviceManager.cpp:211] DeviceManager  createDevice...
+[I20260404 17:37:16.763175 277352 OpenNIHostProtocol.cpp:487] Hardware versions: FW=5.8.23(14),HW=0, Chip=7,Sensor=0,SYS=12
+[E20260404 17:37:16.771040 277352 OpenNIHostProtocol.cpp:502] Get usb core type failed!
+[I20260404 17:37:16.771124 277352 OpenNIHostProtocol.cpp:574] Requesting KeepAlive...
+[I20260404 17:37:16.779052 277352 OpenNIHostProtocol.cpp:581] Got KeepAlive Reply.
+[I20260404 17:37:16.788066 277352 OpenNIHostProtocol.cpp:574] Requesting KeepAlive...
+[I20260404 17:37:16.796037 277352 OpenNIHostProtocol.cpp:581] Got KeepAlive Reply.
+[I20260404 17:37:16.796082 277352 OpenNIHostProtocol.cpp:596] Getting the fixed params...
+[I20260404 17:37:16.811064 277352 OpenNIHostProtocol.cpp:633] Reading sensor serial number...
+[I20260404 17:37:16.819053 277352 OpenNISensorFirmware.cpp:892] Sensor serial number:AY2B43100DG
+[I20260404 17:37:16.831043 277352 OpenNIHostProtocol.cpp:702] Reading sensor platform string...
+[I20260404 17:37:16.839083 277352 OpenNISensorFirmware.cpp:920] Firmware version RD3013
+[I20260404 17:37:16.847047 277352 OpenNISensorFirmware.cpp:926] Device frequency 50
+[I20260404 17:37:16.847110 277352 OpenNIHostProtocol.cpp:773] Update supported depth video modes from firmware
+[I20260404 17:37:16.847121 277352 OpenNIHostProtocol.cpp:806] Reading CMOS 1 supported presets...
+[I20260404 17:37:16.857064 277352 OpenNIHostProtocol.cpp:773] Update supported depth video modes from firmware
+[I20260404 17:37:16.857110 277352 OpenNIHostProtocol.cpp:806] Reading CMOS 2 supported presets...
+[I20260404 17:37:17.094130 277352 OpenNISensorFirmware.cpp:938] OpenNI camera params read.
+[I20260404 17:37:18.050369 277352 OpenNISensorFirmware.cpp:1216] OpenNI camera params read end.
+[I20260404 17:37:18.050458 277352 OpenNISensorIO.cpp:29] Opening endpoint 0x81 for depth...
+[I20260404 17:37:18.050477 277352 OpenNISensorIO.cpp:41] Depth endpoint(0x81) was successfully opened.
+[I20260404 17:37:18.050483 277352 OpenNISensorIO.cpp:48] Opening endpoint 0x82 for IR...
+[I20260404 17:37:18.050490 277352 OpenNISensorIO.cpp:54] IR endpoint(0x82) was successfully opened.
+[I20260404 17:37:18.050496 277352 OpenNISensorIO.cpp:60] Opening endpoint 0x84 for image...
+[I20260404 17:37:18.050501 277352 OpenNISensorIO.cpp:65] Image endpoint is not supported...
+[I20260404 17:37:18.050506 277352 OpenNISensorIO.cpp:75] Opening endpoint 0x83 for misc...
+[I20260404 17:37:18.050511 277352 OpenNISensorIO.cpp:80] Misc endpoint is not supported...
+[I20260404 17:37:18.050518 277352 OpenNISensorIO.cpp:87] Endpoints open end.
+[I20260404 17:37:18.050544 277352 VendorCommand.cpp:187] VendorCommand constructor 0x6f90530
+[I20260404 17:37:18.050554 277352 OpenNIDevice.cpp:162] init sensor map start!
+[I20260404 17:37:18.050566 277352 OpenNIDevice.cpp:176] init sensor map done!
+[I20260404 17:37:18.050624 277352 AbstractDevice.cpp:364] Default config file is not loaded!
+[I20260404 17:37:18.050633 277352 OpenNIDevice.cpp:216] Init depth process param start!
+[I20260404 17:37:18.050640 277352 OpenNIDevice.cpp:229] Device baseline: 39.959, fx: 946.165
+[I20260404 17:37:18.050665 277352 OpenNIDevice.cpp:262] Init depth process param done!
+[I20260404 17:37:18.050675 277352 OpenNIDevice.cpp:29] OpenNIDevice init done
+[I20260404 17:37:18.050686 277352 DeviceManager.cpp:307] DeviceManager createDevice done!
+[I20260404 17:37:18.050694 277352 Pipeline.cpp:26] Pipeline init ...
+[W20260404 17:37:18.050704 277352 Pipeline.cpp:170] Default config file is not loaded!
+[I20260404 17:37:18.050715 277352 Pipeline.cpp:172] loadFrameQueueSizeConfig() config queue size: 10
+[W20260404 17:37:18.050733 277352 FrameProcessingBlock.cpp:21] Default config file is not loaded!
+[I20260404 17:37:18.050741 277352 FrameProcessingBlock.cpp:23] FrameProcessingBlock() config frame queue size: 10
+[W20260404 17:37:18.050750 277352 FrameProcessingBlock.cpp:21] Default config file is not loaded!
+[I20260404 17:37:18.050758 277352 FrameProcessingBlock.cpp:23] FrameProcessingBlock() config frame queue size: 10
+[I20260404 17:37:18.050767 277352 Pipeline.cpp:47] Pipeline init done!
+[I20260404 17:37:18.090471 277352 ObUvcDevice.cpp:56] uvc_open success
+[W20260404 17:37:18.090567 277352 FrameProcessingBlock.cpp:21] Default config file is not loaded!
+[I20260404 17:37:18.090588 277352 FrameProcessingBlock.cpp:23] FrameProcessingBlock() config frame queue size: 10
+[I20260404 17:37:18.090615 277352 VideoSensor.cpp:283] VideoSensor created, SensorType=OB_SENSOR_COLOR
+[I20260404 17:37:18.090627 277352 OpenNIDevice.cpp:387] Color sensor has been created!
+[I20260404 17:37:18.090716 277352 VideoSensor.cpp:389] Query stream profile! size= 18, SensorType=OB_SENSOR_COLOR
+[I20260404 17:37:18.125154 277624 Pipeline.cpp:181] Pipeline start() start!
+[I20260404 17:37:18.125212 277624 FrameProcessingBlockManager.cpp:75]  FrameProcessingBlockManager started, 0 processingblocks contained!
+[I20260404 17:37:18.125222 277624 Pipeline.cpp:226] Start stream ...
+[I20260404 17:37:18.125232 277624 VideoSensor.cpp:502] VideoSensor::start, SensorType=OB_SENSOR_COLOR
+[I20260404 17:37:18.125241 277624 FrameBufferManager.hpp:58] FrameBufferManager created! @N11libobsensor18FrameBufferManagerINS_10ColorFrameEEE, obj addr:140502741561024, frame obj total size:1.97793MB
+[I20260404 17:37:18.125263 277624 FrameBufferManager.cpp:123] ColorFrame bufferManager created!
+[I20260404 17:37:18.125272 277624 FrameProcessor.cpp:75]  FrameProcessor stoped!
+[I20260404 17:37:18.125277 277624 FrameProcessor.cpp:66]  FrameProcessor started, 1 block contained!
+[I20260404 17:37:18.125283 277624 VideoSensor.cpp:579] Profile: width=1920, height=1080, fps=30, format=OB_FORMAT_MJPG
+[I20260404 17:37:18.125290 277624 ObUvcDevice.cpp:71] ObUvcDevice::startStream()...
+[I20260404 17:37:18.125305 277624 ObUvcDevice.cpp:325] playProfile: infIndex= 0 selected_format.width= 1920 height=1080.format=5
+[I20260404 17:37:18.659524 277624 ObUvcDevice.cpp:76] ObUvcDevice::startStream() done
+[I20260404 17:37:18.659715 277624 VideoSensor.cpp:625] Stream starting! SensorType=OB_SENSOR_COLOR
+[I20260404 17:37:18.659737 277624 Pipeline.cpp:237] Sensor start, sensorType=OB_SENSOR_COLOR streamType=OB_STREAM_COLOR
+[I20260404 17:37:18.659747 277624 Pipeline.cpp:239] Start stream done!
+[I20260404 17:37:18.659754 277624 Pipeline.cpp:222] Pipeline start() done!
+[W20260404 17:37:18.861723 277624 Pipeline.cpp:316] waitForFrame timeout= 200
+[W20260404 17:37:18.861788 277624 ApiImpl.cpp:1398] frameSet is nullptr
+[I20260404 17:37:18.909080 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=1.97793MB, max limit=2048MB}
+[I20260404 17:37:18.909206 277664 FrameBufferManager.hpp:58] FrameBufferManager created! @N11libobsensor18FrameBufferManagerINS_8FrameSetEEE, obj addr:140502408222960, frame obj total size:0.000159264MB
+[I20260404 17:37:18.909229 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=1.97809MB, max limit=2048MB}
+[I20260404 17:37:18.945031 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=3.95603MB, max limit=2048MB}
+[I20260404 17:37:18.945142 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=3.95619MB, max limit=2048MB}
+[I20260404 17:37:21.115172 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=5.93412MB, max limit=2048MB}
+[I20260404 17:37:21.115456 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=5.93428MB, max limit=2048MB}
+[I20260404 17:37:21.209578 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=7.91222MB, max limit=2048MB}
+[I20260404 17:37:21.209692 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=7.91238MB, max limit=2048MB}
+[I20260404 17:37:21.241603 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=9.89031MB, max limit=2048MB}
+[I20260404 17:37:21.241708 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=9.89047MB, max limit=2048MB}
+[I20260404 17:37:21.311335 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=11.8684MB, max limit=2048MB}
+[I20260404 17:37:21.311489 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=11.8686MB, max limit=2048MB}
+[I20260404 17:37:21.410820 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=13.8465MB, max limit=2048MB}
+[I20260404 17:37:21.411046 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=13.8467MB, max limit=2048MB}
+[I20260404 17:37:21.509619 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=15.8246MB, max limit=2048MB}
+[I20260404 17:37:21.509754 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=15.8248MB, max limit=2048MB}
+[I20260404 17:37:21.577589 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=17.8027MB, max limit=2048MB}
+[I20260404 17:37:21.577714 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=17.8028MB, max limit=2048MB}
+[I20260404 17:37:21.678020 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=19.7808MB, max limit=2048MB}
+[I20260404 17:37:21.678174 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=19.7809MB, max limit=2048MB}
+[I20260404 17:37:21.841674 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=21.7589MB, max limit=2048MB}
+[I20260404 17:37:21.841801 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=21.759MB, max limit=2048MB}
+[I20260404 17:37:30.312642 277664 FrameBufferManager.cpp:33] New frame buffer allocated=1.97793MB, total usage: {allocated=23.737MB, max limit=2048MB}
+[I20260404 17:37:30.312821 277664 FrameBufferManager.cpp:33] New frame buffer allocated=0.000159264MB, total usage: {allocated=23.7371MB, max limit=2048MB}
+[W20260404 17:37:30.312853 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:30.739593 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:31.007699 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:31.139778 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:31.207711 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:34.340394 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:34.472648 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:36.140842 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:36.407316 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:36.704931 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:37.341070 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:37.541143 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:37.905614 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:38.373344 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:38.805652 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:38.984357 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:39.405577 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:40.206660 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:40.537830 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:40.837931 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:40.905877 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:41.306068 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:41.438941 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:41.938558 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:42.138142 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:42.206207 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:42.870363 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:43.838609 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:45.138927 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:45.602909 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:46.371109 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:46.707401 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:46.903401 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:47.003233 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:47.903542 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:48.135607 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:48.735565 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:49.835834 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:50.003988 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:50.304343 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:50.604251 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:51.104175 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:51.368568 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:51.668666 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:51.868468 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:52.768513 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:52.911232 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:53.136621 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:53.704795 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:54.000859 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:54.201575 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:54.500972 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:55.269187 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:55.701567 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:56.201264 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:56.801570 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:57.102017 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:57.233508 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:37:59.434049 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:00.169729 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:01.735113 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:01.866654 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:04.499162 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:07.299932 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:07.631796 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:07.931874 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:18.167351 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:19.862543 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:20.931443 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:21.562944 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:23.895955 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:24.495666 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:27.129176 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:27.628253 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:28.328536 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:30.660950 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:31.061316 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:31.661231 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:32.293354 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:34.693989 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:35.626158 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:36.031165 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:36.294170 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:36.926335 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:37.126343 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:37.726500 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:38.426755 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:39.026867 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:39.226917 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:39.495010 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:40.663275 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:40.727239 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:40.927237 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:41.559347 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:42.191663 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:43.395345 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:43.791945 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:44.424135 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:45.260367 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:46.262152 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:46.460584 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:46.592716 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:47.192723 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:47.424714 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:47.624822 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:47.827710 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:47.992817 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:48.625089 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:54.223212 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:55.058357 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:57.154939 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:58.155220 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:58.723486 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:38:58.955277 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:00.255734 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:00.724222 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:00.955648 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:01.487840 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:01.587836 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:01.887993 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:02.556288 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:04.220479 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:05.288733 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:08.289312 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:10.053788 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:10.485764 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:11.086009 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:11.386211 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:11.587004 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:12.154408 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:12.586334 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:13.387302 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:13.618618 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:14.354609 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:14.786729 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:15.318858 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:17.151288 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:18.551574 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:18.851792 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:19.083922 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:20.284235 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:21.084225 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:21.684404 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:22.316596 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:22.884691 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:23.084604 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:23.716778 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:23.787230 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:23.985003 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:24.652916 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:25.517764 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:26.817612 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:27.185607 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:27.217581 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:27.417719 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:27.618175 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:28.717873 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:29.482187 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:30.650286 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:32.682801 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:33.150863 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:33.983011 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:34.515209 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:40.448439 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:40.748487 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:40.916568 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:41.380730 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:42.181900 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:42.580909 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:42.981220 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:43.281252 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:43.613165 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:44.313300 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:44.745739 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:45.348944 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:46.315164 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:46.445782 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:47.346047 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:48.046144 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:48.678272 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:48.878383 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:49.978715 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:50.446763 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:51.247601 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:51.547195 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:52.011085 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:53.079537 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:53.879453 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:54.343696 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:54.943908 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:55.811923 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:56.379992 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:56.512043 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:57.376209 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:57.477312 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:39:58.514622 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:02.209286 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:02.545329 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:03.245641 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:03.409657 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:04.641875 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:05.109925 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:06.210270 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:07.110388 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:07.549865 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:07.874719 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:08.974882 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:09.807125 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:10.307123 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:11.175319 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:11.575627 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:12.109331 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:12.743774 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:13.139845 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:13.611277 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:15.040187 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:17.772789 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:18.140838 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:18.440896 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:18.941296 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:19.805222 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:19.906148 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:20.541401 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:21.773782 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:22.005775 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:22.938021 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:23.106086 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:23.506316 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:24.638644 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:25.470535 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:25.570607 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:25.675261 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:26.271312 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:26.671226 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:27.039266 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:27.475850 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:27.506908 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:28.039044 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:29.303357 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:29.803432 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:30.339607 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:30.503750 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:30.803689 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:31.539916 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:31.703889 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:32.172116 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:32.836227 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:33.004329 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:33.772383 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:34.136397 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:37.269111 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:37.437295 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:37.705363 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:38.837556 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:41.171167 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:41.434365 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:44.202951 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:47.235332 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:47.467499 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:47.835522 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:48.702234 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:49.399794 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:49.599963 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:49.768018 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:50.168154 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:50.500355 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:50.832131 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:51.169386 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:51.668694 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:51.868367 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:52.068430 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:52.232471 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:52.968608 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:53.568771 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:55.165098 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:55.433171 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:56.165439 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:56.301491 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:56.765512 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:56.897624 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:57.165603 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:57.433620 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:57.497844 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:57.636013 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:58.197772 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:58.399300 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:58.933899 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:59.598083 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:59.866324 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:40:59.998194 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:00.366341 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:01.098462 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:01.398715 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:01.630543 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:01.930651 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:02.430800 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:02.798906 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:04.763252 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:05.263640 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:05.531433 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:05.863476 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:06.299674 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:06.631664 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:06.795763 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:07.163947 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:09.928417 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:10.728610 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:10.996763 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:11.430955 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:14.097326 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:14.429500 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:15.197638 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:15.329607 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:15.497614 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:15.661764 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:15.830427 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:16.061789 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:16.162024 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:16.862135 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:17.394191 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:17.830224 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:18.430256 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[W20260404 17:41:18.794338 277664 Pipeline.cpp:295] Pipeline source frameset queue fulled, drop the oldest frame!
+[I20260404 17:41:22.066308 277624 Pipeline.cpp:350] Pipeline stop start!
+[I20260404 17:41:22.066452 277624 Pipeline.cpp:322] Stop stream ...
+[I20260404 17:41:22.066713 277624 VideoSensor.cpp:629] VideoSensor::stop, SensorType=OB_SENSOR_COLOR
+[I20260404 17:41:22.066826 277624 ObUvcDevice.cpp:81] ObUvcDevice::stopStream()...
+[I20260404 17:41:22.167318 277624 ObUvcDevice.cpp:85] ObUvcDevice::stopStream() done
+[I20260404 17:41:22.167392 277624 VideoSensor.cpp:662] stream stoped! SensorType=OB_SENSOR_COLOR
+[I20260404 17:41:22.167411 277624 FrameProcessor.cpp:75]  FrameProcessor stoped!
+[I20260404 17:41:22.167428 277624 VideoSensor.cpp:671] VideoSensor::stop done, SensorType=OB_SENSOR_COLOR
+[I20260404 17:41:22.167454 277624 Pipeline.cpp:335] Sensor stop, sensorType=OB_SENSOR_COLOR
+[I20260404 17:41:22.167460 277624 Pipeline.cpp:341] Stop stream done!
+[I20260404 17:41:22.167472 277624 FrameProcessingBlockManager.cpp:84]  FrameProcessingBlockManager stoped!
+[I20260404 17:41:22.167479 277624 FrameProcessingBlockManager.cpp:20] Processing block list cleared!
+[I20260404 17:41:22.167510 277624 Pipeline.cpp:379] Pipeline stop done!
+[I20260404 17:41:22.167546 277624 FrameBufferManager.hpp:62] FrameBufferManager destroyed! @N11libobsensor18FrameBufferManagerINS_10ColorFrameEEE,  obj addr:140502741561024
+[I20260404 17:41:22.167555 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=21.7592MB, max limit=2048MB}
+[I20260404 17:41:22.167575 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=19.7813MB, max limit=2048MB}
+[I20260404 17:41:22.167582 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=17.8033MB, max limit=2048MB}
+[I20260404 17:41:22.167588 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=15.8254MB, max limit=2048MB}
+[I20260404 17:41:22.167594 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=13.8475MB, max limit=2048MB}
+[I20260404 17:41:22.167600 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=11.8695MB, max limit=2048MB}
+[I20260404 17:41:22.167608 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=9.89159MB, max limit=2048MB}
+[I20260404 17:41:22.167613 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=7.91365MB, max limit=2048MB}
+[I20260404 17:41:22.167619 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=5.93572MB, max limit=2048MB}
+[I20260404 17:41:22.167625 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=3.95778MB, max limit=2048MB}
+[I20260404 17:41:22.167631 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=1.97985MB, max limit=2048MB}
+[I20260404 17:41:22.167637 277624 FrameBufferManager.cpp:54] Frame buffer released=1.97793MB, total usage: {allocated=0.00191116MB, max limit=2048MB}
+[I20260404 17:41:22.217061 277352 Pipeline.cpp:71] Pipeline deInit start!
+[I20260404 17:41:22.217134 277352 Pipeline.cpp:79] Pipeline deInit done!
+[I20260404 17:41:22.217168 277352 FrameBufferManager.hpp:62] FrameBufferManager destroyed! @N11libobsensor18FrameBufferManagerINS_8FrameSetEEE,  obj addr:140502408222960
+[I20260404 17:41:22.217182 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.0017519MB, max limit=2048MB}
+[I20260404 17:41:22.217207 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.00159264MB, max limit=2048MB}
+[I20260404 17:41:22.217214 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.00143337MB, max limit=2048MB}
+[I20260404 17:41:22.217221 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.00127411MB, max limit=2048MB}
+[I20260404 17:41:22.217226 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.00111485MB, max limit=2048MB}
+[I20260404 17:41:22.217232 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.000955582MB, max limit=2048MB}
+[I20260404 17:41:22.217239 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.000796318MB, max limit=2048MB}
+[I20260404 17:41:22.217244 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.000637054MB, max limit=2048MB}
+[I20260404 17:41:22.217250 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.000477791MB, max limit=2048MB}
+[I20260404 17:41:22.217264 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.000318527MB, max limit=2048MB}
+[I20260404 17:41:22.217270 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0.000159264MB, max limit=2048MB}
+[I20260404 17:41:22.217276 277352 FrameBufferManager.cpp:54] Frame buffer released=0.000159264MB, total usage: {allocated=0MB, max limit=2048MB}
+[I20260404 17:41:22.217290 277352 OpenNIDevice.cpp:33] ~OpenNIDevice done
+[I20260404 17:41:22.217309 277352 VideoSensor.cpp:287] VideoSensor::~VideoSensor(), SensorType=OB_SENSOR_COLOR
+[I20260404 17:41:22.217366 277352 VendorCommand.cpp:195] destructor 0x6f90530
+[I20260404 17:41:22.217381 277352 VendorCommand.cpp:439] disableHeartBeat heartBeatHelper_: 0
+[I20260404 17:41:22.217387 277352 HostProtocol.cpp:143] ~HostProtocol()
+[I20260404 17:41:22.217434 277527 HostProtocol.cpp:171] emitTranDataFutureSignalThread_ finish
+[I20260404 17:41:22.217501 277352 ContextLibusb.cpp:56] UsbContext::stopEventHandler()
+[I20260404 17:41:22.217644 277352 Context.cpp:55] Context destroying ...
+[I20260404 17:41:22.217654 277352 DeviceManager.cpp:103] DeviceManager destroy ...
+[I20260404 17:41:22.217664 277352 ContextLibusb.cpp:56] UsbContext::stopEventHandler()
+[I20260404 17:41:22.217841 277352 DeviceManager.cpp:131] DeviceManager destroy done
+[I20260404 17:41:22.217851 277352 DeviceManager.cpp:137] DeviceManager Destructors  done

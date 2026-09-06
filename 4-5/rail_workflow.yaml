@@ -1,0 +1,44 @@
+rail_workflow:
+  cycle_count: 2
+  # traverse + new_copy_no_capture 联动时，建议开启门控。
+  # 启动后 new_copy_no_capture 会先等待 traverse 放行，避免导航过程中提前切到对轨/横移模式。
+  use_alignment_gate: true
+  alignment_enable_topic: /traverse/alignment_enabled
+  # 导航话题配置
+  nav_goal_topic: /cur_goal
+  nav_status_topic: /cur_local_goal_status
+  nav_frame_id: camera_init
+  nav_goal_z: 0.0
+  nav_goal_match_tolerance_m: 2.0
+  nav_arrive_settle_sec: 0.8
+  nav_goal_timeout_sec: 0.0
+  nav_goal_retry_count: 2
+  # 轨道遍历导航点列表。
+  # traverse 会从第一个点开始，导航成功 -> 放开对轨 -> 上轨/下轨 -> 再去下一个点，直到最后一个。
+  # 请按实际轨道入口坐标填写。
+  navigation_goals: []
+  # 示例:
+  # navigation_goals:
+  #   - label: point_1
+  #     x: 0.74
+  #     y: -29.61
+  #     yaw_deg: 180.0
+  #   - label: point_2
+  #     x: 1.10
+  #     y: -29.61
+  #     yaw_deg: 180.0
+  #   - label: point_3
+  #     x: 1.50
+  #     y: -29.61
+  #     yaw_deg: 180.0
+  # 上轨前进速度(mm/s)
+  forward_linear_speed_mm_s: 500
+  # 回零后横移次数(1=执行1次横移，2=执行2次横移)
+  lateral_move_count: 1
+  # 每次横移距离(mm)，按轮次顺序读取:
+  # 第1次横移 -> lateral_distances_mm[0]
+  # 第2次横移 -> lateral_distances_mm[1]
+  lateral_distances_mm:
+    - -1760.0
+  # 兼容旧配置: 未配置 lateral_distances_mm 时使用该默认值
+  lateral_distance_mm: -1760.0

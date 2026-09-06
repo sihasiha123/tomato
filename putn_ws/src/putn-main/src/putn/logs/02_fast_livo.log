@@ -1,0 +1,113 @@
+[0m[INFO] [1773558861.231217077]: Found parameter: laserMapping/cam_model, value: Pinhole[0m
+[0m[INFO] [1773558861.231949030]: Found parameter: laserMapping/cam_width, value: 1280[0m
+[0m[INFO] [1773558861.232123176]: Found parameter: laserMapping/cam_height, value: 1024[0m
+[0m[INFO] [1773558861.232294248]: Found parameter: laserMapping/scale, value: 0.5[0m
+[0m[INFO] [1773558861.232448172]: Found parameter: laserMapping/cam_fx, value: 1293.57[0m
+[0m[INFO] [1773558861.232596428]: Found parameter: laserMapping/cam_fy, value: 1293.32[0m
+[0m[INFO] [1773558861.232740946]: Found parameter: laserMapping/cam_cx, value: 626.914[0m
+[0m[INFO] [1773558861.232999507]: Found parameter: laserMapping/cam_cy, value: 522.799[0m
+[0m[INFO] [1773558861.233222233]: Found parameter: laserMapping/cam_d0, value: -0.07616[0m
+[0m[INFO] [1773558861.233417596]: Found parameter: laserMapping/cam_d1, value: 0.123001[0m
+[0m[INFO] [1773558861.233610778]: Found parameter: laserMapping/cam_d2, value: -0.00113[0m
+[0m[INFO] [1773558861.233773881]: Found parameter: laserMapping/cam_d3, value: 0.000251[0m
+scale: 0.5
+intrinsic: 646.784720, 646.657750, 313.456795, 261.399612
+width: 640, height: 512, scale: 0.500000
+... logging to /home/nuc531/.ros/log/953c0852-203e-11f1-b403-d9a1693d82d3/roslaunch-nuc531-NUC11TNKi5-5519.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/nuc531/robot/fastlivo_ws/src/FAST-LIVO2-main/launch/mapping_mid360.launch
+[1mstarted roslaunch server http://nuc531-NUC11TNKi5:43037/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /common/img_en: 0
+ * /common/img_topic: /left_camera/image
+ * /common/imu_topic: /livox/imu
+ * /common/lid_topic: /livox/lidar
+ * /common/lidar_en: 1
+ * /common/ros_driver_bug_fix: False
+ * /evo/pose_output_en: False
+ * /evo/seq_name: CBD_Building_01
+ * /extrin_calib/Pcl: [0.0194384, 0.104...
+ * /extrin_calib/Rcl: [0.00610193, -0.9...
+ * /extrin_calib/extrinsic_R: [1, 0, 0, 0, 1, 0...
+ * /extrin_calib/extrinsic_T: [0.04165, 0.02326...
+ * /imu/acc_cov: 0.5
+ * /imu/b_acc_cov: 0.0001
+ * /imu/b_gyr_cov: 0.0001
+ * /imu/gyr_cov: 0.3
+ * /imu/imu_en: True
+ * /imu/imu_int_frame: 30
+ * /laserMapping/cam_cx: 626.91359
+ * /laserMapping/cam_cy: 522.799224
+ * /laserMapping/cam_d0: -0.07616
+ * /laserMapping/cam_d1: 0.123001
+ * /laserMapping/cam_d2: -0.00113
+ * /laserMapping/cam_d3: 0.000251
+ * /laserMapping/cam_fx: 1293.56944
+ * /laserMapping/cam_fy: 1293.3155
+ * /laserMapping/cam_height: 1024
+ * /laserMapping/cam_model: Pinhole
+ * /laserMapping/cam_width: 1280
+ * /laserMapping/scale: 0.5
+ * /lio/beam_err: 0.05
+ * /lio/dept_err: 0.02
+ * /lio/layer_init_num: [5, 5, 5, 5, 5]
+ * /lio/max_iterations: 5
+ * /lio/max_layer: 2
+ * /lio/max_points_num: 50
+ * /lio/min_eigen_value: 0.0025
+ * /lio/voxel_size: 0.5
+ * /local_map/half_map_size: 100
+ * /local_map/map_sliding_en: False
+ * /local_map/sliding_thresh: 8
+ * /pcd_save/colmap_output_en: False
+ * /pcd_save/filter_size_pcd: 0.15
+ * /pcd_save/interval: -1
+ * /pcd_save/pcd_save_en: False
+ * /preprocess/blind: 2.0
+ * /preprocess/filter_size_surf: 0.1
+ * /preprocess/lidar_type: 1
+ * /preprocess/point_filter_num: 1
+ * /preprocess/scan_line: 4
+ * /publish/blind_rgb_points: 0.0
+ * /publish/dense_map_en: True
+ * /publish/pub_effect_point_en: False
+ * /publish/pub_plane_en: False
+ * /publish/pub_scan_num: 1
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+ * /time_offset/exposure_time_init: 0.0
+ * /time_offset/img_time_offset: 0.1
+ * /time_offset/imu_time_offset: 0.0
+ * /uav/gravity_align_en: True
+ * /uav/imu_rate_odom: False
+ * /vio/exposure_estimate_en: True
+ * /vio/img_point_cov: 100
+ * /vio/inv_expo_cov: 0.1
+ * /vio/inverse_composition_en: False
+ * /vio/max_iterations: 5
+ * /vio/normal_en: True
+ * /vio/outlier_threshold: 1000
+ * /vio/patch_pyrimid_level: 4
+ * /vio/patch_size: 8
+ * /vio/raycast_en: False
+
+NODES
+  /
+    laserMapping (fast_livo/fastlivo_mapping)
+    republish (image_transport/republish)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/nuc531/robot/fastlivo_ws/src/FAST-LIVO2-main/launch/mapping_mid360.launch http://localhost:11311
+[1mprocess[laserMapping-1]: started with pid [5533][0m
+[1mprocess[republish-2]: started with pid [5534][0m
+[republish-2] killing on exit
+[laserMapping-1] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

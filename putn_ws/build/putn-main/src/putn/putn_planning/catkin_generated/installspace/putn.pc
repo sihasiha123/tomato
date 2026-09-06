@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/Desktop/de5/robot/putn_ws/install
+
+Name: putn
+Description: Description of putn
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 

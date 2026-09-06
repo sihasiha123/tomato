@@ -1,0 +1,32 @@
+# === Global planning (PF-RRT* + surface fitting) ===
+planning:
+  goal_thre: 0.8
+  step_size: 0.35  # 0.25
+  h_surf_car: 0.40
+  neighbor_radius: 1.50  #1.20
+
+  # 平面拟合与地形可通行性（保持你代码默认）
+  w_fit_plane: 0.4
+  w_flatness: 4000.0
+  w_slope: 0.4
+  w_sparsity: 0.4
+  ratio_min: 0.25
+  ratio_max: 0.4
+  conv_thre: 0.1152
+  radius_fit_plane: 1.0
+
+  # 迭代时间上限
+  max_initial_time: 1500.0  #600.0
+
+  # === 关键：圆弧/回旋线倒角（与阿克曼约束一致）===
+  # 建议 R_min ≥ L / tan(δ_max)，可在 launch 里根据车辆参数做一次一致性检查/覆盖
+  min_turn_radius: 1.30         # m
+  fillet_clearance: 0.15        # m（安全余量，建议 > 车体外扩/定位误差）
+  fillet_ds: 0.07               # m（轨迹离散采样间距）
+  use_clothoid: false           # 暂不生效也没关系，先保持 false
+
+smoothing:
+  min_turn_radius: 1.30
+  fillet_clearance: 0.15
+  fillet_ds: 0.07
+  use_clothoid: false

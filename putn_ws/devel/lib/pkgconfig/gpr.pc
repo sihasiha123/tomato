@@ -1,0 +1,8 @@
+prefix=/home/ubuntu/Desktop/de5/robot/putn_ws/devel
+
+Name: gpr
+Description: Description of gpr
+Version: 0.0.0
+Cflags: -I/home/ubuntu/Desktop/de5/robot/putn_ws/src/putn-main/src/putn/putn_gpr/include
+Libs: -L${prefix}/lib 
+Requires: 

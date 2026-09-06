@@ -1,0 +1,15 @@
+Log file created at: 2026/04/17 18:16:51
+Running on machine: ubuntu
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+[I20260417 18:16:51.560083 164228 DeviceManager.cpp:54] DeviceManager init ...
+[I20260417 18:16:51.560886 164228 LinuxPal.cpp:21] createObPal: create LinuxPal!
+[I20260417 18:16:51.563982 164228 EnumeratorLibusb.cpp:325] queryDevicesInfo done!
+[E20260417 18:16:51.564033 164228 ObV4lDevice.cpp:330] Failed to open /sys/class/video4linux
+[I20260417 18:16:51.564059 164228 DeviceManager.cpp:373] Current usb device port list::
+[I20260417 18:16:51.564076 164228 DeviceManager.cpp:362] No device matched!
+[I20260417 18:16:51.564134 164228 LinuxPal.cpp:142] Create PollingDeviceWatcher!
+[I20260417 18:16:51.564149 164228 DeviceManager.cpp:99] DeviceManager init  done!
+[I20260417 18:16:51.564158 164228 DeviceManager.cpp:50] DeviceManager construct done
+[I20260417 18:16:51.564170 164228 Context.cpp:51] Context created!
+[W20260417 18:16:51.564188 164228 ObException.cpp:5] No device found, fail to create pipeline!
