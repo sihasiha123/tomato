@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/home/nuc531/robot/putn_ws/src/putn-main/src/putn/putn_mpc/scripts/controller.py", line 16, in <module>
-    settings = termios.tcgetattr(sys.stdin)
-termios.error: (25, 'Inappropriate ioctl for device')

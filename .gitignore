@@ -1,0 +1,36 @@
+# ROS / Catkin generated workspaces
+**/build/
+**/devel/
+**/install/
+**/.catkin_tools/
+**/.catkin_workspace
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/CTestTestfile.cmake
+
+# Python caches
+**/__pycache__/
+*.py[cod]
+
+# Compiled native artifacts
+*.o
+*.obj
+*.so
+*.a
+*.dll
+*.lib
+
+# Runtime logs and ROS diagnostics
+**/[Ll]og/
+**/[Ll]ogs/
+*.log
+**/OB_LOG*.txt
+**/OBSensor.INFO
+putn_ws/frames.gv
+putn_ws/frames.pdf
+
+# Editor and application temporary files
+*~
+.~lock.*
+

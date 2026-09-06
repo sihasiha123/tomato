@@ -1,8 +1,0 @@
--DROS_BUILD_SHARED_LIBS=1
--DROS_BUILD_SHARED_LIBS=1
--DROS_PACKAGE_NAME="rviz_plugins"
--DROSCONSOLE_BACKEND_LOG4CXX
--DQT_NO_KEYWORDS
--o
-/home/ubuntu/Desktop/de5/robot/putn_ws/build/putn-main/src/putn/putn_rviz_plugins/src/moc_goal_tool.cpp
-/home/ubuntu/Desktop/de5/robot/putn_ws/src/putn-main/src/putn/putn_rviz_plugins/src/goal_tool.h
